@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<title>作业</title>
+		<style>
+			#container {
+				display: flex;
+			}
+
+			.box {
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<img src="学习调研.png" alt="">
+			<div class="box" data-img="1.png"><img src="调查研究论.png" alt=""></div>
+			<div class="box" data-img="2.png"><img src="调研与写作方法谈.png" alt=""></div>
+			<div class="box" data-img="3.png"><img src="调研成果选.png" alt=""></div>
+		</div>
+		<div id="content">
+			<img id="image" src="1.png" alt="图片">
+		</div>
+		<script>
+			const container = document.getElementById('container');
+			const contentElement = document.getElementById('content');
+			const imageElement = document.getElementById('image');
+			const boxes = container.querySelectorAll('.box');
+			boxes.forEach(function(box) {
+				box.addEventListener('mouseover', function() {
+					const imgSrc = box.getAttribute('data-img');
+					imageElement.src = imgSrc;
+				});
+			});
+		</script>
+	</body>
+</html>
