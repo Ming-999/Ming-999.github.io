@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proxy Request Example</title>
+</head>
+<body>
+    <button onclick="proxyRequest()">Make Proxy Request</button>
+    <div id="response"></div>
+
+    <script>
+        async function proxyRequest() {
+            const TELEGRAPH_URL = 'https://generativelanguage.googleapis.com/v1beta/models/';
+            const url = TELEGRAPH_URL + 'exampleEndpoint'; // Change 'exampleEndpoint' to the actual endpoint you want to request
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
