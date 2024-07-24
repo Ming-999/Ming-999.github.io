@@ -1,0 +1,30 @@
+name: Generate Files JSON
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Generate files.json
+      run: |
+        echo '{ "files": [' > data/files.json
+        for file in download/*; do
+          echo "\"$(basename "$file")\"," >> data/files.json
+        done
+        sed -i '$ s/.$//' data/files.json
+        echo ']}' >> data/files.json
+
+    - name: Commit files.json
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add data/files.json
+        git commit -m 'Generate files.json'
+        git push

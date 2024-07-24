@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>下载文件</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<style>
+			body {
+				background-color: #f8f9fa;
+			}
+
+			h1 {
+				color: #343a40;
+			}
+
+			.list-group-item {
+				border: 1px solid #dee2e6;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="my-4 text-center">下载文件</h1>
+			<div id="file-list" class="list-group"></div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				// 获取文件列表的JSON数据
+				$.getJSON('data/files.json', function(data) {
+					// 遍历文件列表，生成下载链接
+					data.files.forEach(function(file) {
+						$('#file-list').append(
+							`<a href="download/${file}" class="list-group-item list-group-item-action" download>${file}</a>`
+						);
+					});
+				}).fail(function() {
+					$('#file-list').append(
+						`<div class="alert alert-danger">无法加载文件列表。</div>`
+					);
+				});
+			});
+		</script>
+	</body>
+</html>
