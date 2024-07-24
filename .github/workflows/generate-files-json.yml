@@ -27,7 +27,7 @@ jobs:
 
     - name: Commit files.json
       env:
-        GITHUB_TOKEN: ${{ secrets.pat }}
+        GITHUB_TOKEN: ${{ secrets.ss }}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
