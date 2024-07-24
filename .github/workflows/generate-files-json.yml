@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Generate files.json
       run: |
@@ -30,5 +30,5 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
         git add data/files.json
-        git commit -m 'Generate files.json'
+        git commit -m 'Generate files.json' || echo "No changes to commit"
         git push
