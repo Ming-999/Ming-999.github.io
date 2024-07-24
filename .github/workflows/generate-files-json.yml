@@ -10,13 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Generate files.json
       run: |
+        mkdir -p data
         echo '{ "files": [' > data/files.json
         for file in download/*; do
-          echo "\"$(basename "$file")\"," >> data/files.json
+          if [ "$file" != "download/*" ]; then
+            echo "\"$(basename "$file")\"," >> data/files.json
+          fi
         done
         sed -i '$ s/.$//' data/files.json
         echo ']}' >> data/files.json
