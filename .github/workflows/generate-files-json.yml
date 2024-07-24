@@ -27,10 +27,10 @@ jobs:
 
     - name: Commit files.json
       env:
-        GITHUB_TOKEN: ${{ secrets.ss }}
+        MY_PAT: ${{ secrets.MY_PAT }} # Use the custom secret name here
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
         git add data/files.json
         git commit -m 'Generate files.json' || echo "No changes to commit"
-        git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+        git push https://x-access-token:${MY_PAT}@github.com/${{ github.repository }} HEAD:refs/heads/main
